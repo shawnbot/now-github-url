@@ -2,10 +2,11 @@
 const yargs = require('yargs')
 const getNowURL = require('.')
 const argv = yargs.argv
-const [cwd = process.cwd(), ref = 'commit'] = argv._
+const [cwd = process.cwd()] = argv._
 const options = Object.assign({
+  ref: 'sha',
   githubToken: process.env.GH_TOKEN
-}, argv, {cwd, ref})
+}, argv, {cwd})
 
 getNowURL(options)
   .then(url => console.log(url))

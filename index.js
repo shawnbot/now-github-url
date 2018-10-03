@@ -23,11 +23,11 @@ module.exports = function getNowURL(options = {}) {
   }
 
   const getRef = {
-    branch: getBranch(),
-    commit: getSHA()
-  }[ref] || Promise.resolve(ref)
+    branch: getBranch,
+    sha: getSHA,
+  }[ref] || (() => ref)
 
-  return Promise.all([getRef, getRepo({cwd})])
+  return Promise.all([getRef(), getRepo({cwd})])
     .then(([ref, {owner, repo}]) => {
       console.warn(`getting statuses for: https://github.com/${owner}/${repo}/tree/${ref} ...`)
       return github.repos.getStatuses({ref, owner, repo})
