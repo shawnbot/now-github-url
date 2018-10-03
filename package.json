@@ -1,0 +1,21 @@
+{
+  "name": "now-github-url",
+  "version": "0.1.0",
+  "description": "Get the Now deployment URL for the current git commit deployed via GitHub",
+  "main": "index.js",
+  "bin": {
+    "now-github-url": "cli.js"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "Shawn Allen",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^15.11.4",
+    "execa": "^1.0.0",
+    "fs-extra": "^7.0.0",
+    "github-repo-from-config": "^1.0.2",
+    "now-fetch": "^0.1.1",
+    "yargs": "^12.0.2"
+  }
+}
