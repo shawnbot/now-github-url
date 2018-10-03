@@ -1,6 +1,6 @@
 {
   "name": "now-github-url",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Get the Now deployment URL for the current git commit deployed via GitHub",
   "main": "index.js",
   "bin": {
