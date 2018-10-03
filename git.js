@@ -9,7 +9,7 @@ function getBranch(execOptions = {}) {
 }
 
 function getSHA(execOptions = {}) {
-  return execa('git', ['rev-parse', '--short', 'HEAD'], execOptions)
+  return execa('git', ['rev-parse', 'HEAD'], execOptions)
     .then(proc => proc.stdout)
 }
 
