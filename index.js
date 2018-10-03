@@ -8,7 +8,7 @@ const NOW_CONTEXT = 'deployment/now'
 
 module.exports = function getNowURL(options = {}) {
   const {
-    dir,
+    cwd,
     ref,
     githubToken
   } = options
@@ -27,7 +27,7 @@ module.exports = function getNowURL(options = {}) {
     commit: getSHA()
   }[ref] || Promise.resolve(ref)
 
-  return Promise.all([getRef, getRepo()])
+  return Promise.all([getRef, getRepo({cwd})])
     .then(([ref, {owner, repo}]) => {
       console.warn(`getting statuses for: https://github.com/${owner}/${repo}/tree/${ref} ...`)
       return github.repos.getStatuses({ref, owner, repo})
@@ -45,6 +45,7 @@ module.exports = function getNowURL(options = {}) {
         const targetUrl = nowStatus.target_url
         const {deploymentId} = qs.parse(url.parse(targetUrl).query)
         return nowFetch(`/v2/now/deployments/${deploymentId}`)
+          .then(res => res.json())
           .then(deployment => `https://${deployment.host}`)
       } else {
         console.warn('no matching statuses in:', statuses.map(d => d.context).join(', '))
