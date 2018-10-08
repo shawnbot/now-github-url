@@ -58,3 +58,6 @@ pass on your CI provider. For instance, in Travis:
    environment variable to your Travis repo settings as `NOW_TOKEN`.
 
 1. 💰
+[Now]: https://zeit.co/now
+[Now for GitHub]: https://zeit.co/github
+[commit status]: https://developer.github.com/v3/repos/statuses/
