@@ -56,8 +56,21 @@ pass on your CI provider. For instance, in Travis:
 1. Create a new Now access token from your dashboard and add it as an
    environment variable to your Travis repo settings as `NOW_TOKEN`.
 
+1. If you don't have one already, create a GitHub API access token and add it
+   to your environment as `GH_TOKEN`.
+
 1. 💰
 
+## Local usage
+You can also use the utility in a local git repo if you're logged in with the
+Now CLI and have `GH_TOKEN` set to a GitHub access token in your environment.
+
+```sh
+cd ~/my/cool/repo
+export NOW_TOKEN="..."
+export GH_TOKEN="..."
+npx now-github-url
+```
 
 [Now]: https://zeit.co/now
 [Now for GitHub]: https://zeit.co/github
