@@ -23,23 +23,22 @@ pass on your CI provider. For instance, in Travis:
 
     ```bash
     branch="$TRAVIS_BRANCH"
-    alias=$(now-github-url --ref="$TRAVIS_COMMIT"
-    prefix=$(jq -r .name now.json) # or hard-code the prefix
-    alias="${prefix}-${branch}.now.sh"
-    now $* alias $alias
+    alias=$(now-github-url --ref="$TRAVIS_COMMIT")
+    # or hard-code the prefix if you don't have a "name" field
+    prefix=$(jq -r .name now.json)
+    now $* alias "${prefix}-${branch}.now.sh"
     ```
 
-    Or, if you need to test path aliases in your branch deployment:"
+    Or, if you need to test path aliases in your branch deployment:
 
     ```bash
     branch="$TRAVIS_BRANCH"
-    root=$(now-github-url --ref="$TRAVIS_COMMIT"
-    prefix=$(jq -r .name now.json) # or hard-code the prefix
-    alias="${prefix}-${branch}.now.sh"
+    root="$(now-github-url --ref="$TRAVIS_COMMIT")"
     now $* alias $root
-    # create
     cat rules.json | jq -rM ".rules[-1].dest = \"$root\"" > rules-preview.json
-    now $* alias $alias -r rules-preview.json
+    # or hard-code the prefix if you don't have a "name" field
+    prefix=$(jq -r .name now.json)
+    now $* alias "${prefix}-${branch}.now.sh" -r rules-preview.json
     ```
 
 1. Add a `deploy` section to your `.travis.yml` that runs the script with your
